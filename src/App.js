@@ -11,7 +11,6 @@ export default function App() {
 
   useEffect(
     function () {
-      localStorage.setItem("location", location);
       async function fetchWeather() {
         try {
           if (location.length < 2) return;
@@ -38,8 +37,8 @@ export default function App() {
           setIsLoading(false);
         }
       }
-
       fetchWeather();
+      localStorage.setItem("location", location);
     },
     [location]
   );
