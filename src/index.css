@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap");
 
 * {
   margin: 0;
@@ -11,11 +11,11 @@ html {
 }
 
 body {
-  font-family: "Cinzel Decorative", cursive;
+  font-family: "Merriweather", serif;
   font-size: 2rem;
   height: 100vh;
-  color: #222;
-  background-color: #eabfb9;
+  color: #29465b;
+  background-color: #add8e6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,9 +28,11 @@ body {
   width: 112rem;
   gap: 4rem;
   padding: 6rem 0;
-  border: 2px solid #222;
-  outline: 2px solid #222;
-  outline-offset: 1.2rem;
+  border: 2px solid #29465b;
+  border-radius: 20px;
+  box-shadow: 5px 5px 50px 1px #29465b;
+  /* outline: 2px solid #a9e9ff;
+  outline-offset: 1.2rem; */
 }
 
 h1 {
@@ -49,14 +51,15 @@ input {
   font-family: inherit;
   color: inherit;
   font-size: 2rem;
-  background-color: #f0d2ce;
+  background-color: #a9e9ff;
   padding: 1.6rem 3.2rem;
   border: none;
+  border-radius: 20px;
   width: 32rem;
 }
 
 input:focus {
-  outline: 2px solid #222;
+  outline: 2px solid #29465b;
 }
 
 .weather {
@@ -66,9 +69,10 @@ input:focus {
 }
 
 .day {
-  background-color: #f0d2ce;
+  background-color: #a9e9ff;
   padding: 1.6rem 0 2rem;
   width: 12.8rem;
+  border-radius: 20px;
 
   display: flex;
   flex-direction: column;
@@ -83,10 +87,15 @@ input:focus {
 
 .day.important {
   background-color: #ecc5c0;
-  outline: 2px solid #222;
+  outline: 2px solid #29465b;
 }
 
 .loader {
   font-size: 2.4rem;
   font-weight: 700;
+}
+.error {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #ff6752;
 }
