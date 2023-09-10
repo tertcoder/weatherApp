@@ -41,7 +41,7 @@ export default function App() {
           console.log(weatherData);
           setWeather(weatherData.daily);
         } catch (err) {
-          console.error(err.message);
+          if (err.name === "AbortError") return;
           setError(err.message);
         } finally {
           setIsLoading(false);
@@ -50,9 +50,9 @@ export default function App() {
       fetchWeather();
       localStorage.setItem("location", location);
 
-      // return () => {
-      //   controller.abort();
-      // };
+      return () => {
+        controller.abort();
+      };
     },
     [location]
   );
@@ -114,6 +114,12 @@ function Day({ date, max, min, code, isToday, sunnyStyle }) {
         {Math.floor(min)}&deg; &mdash;
         <strong> {Math.ceil(max)}&deg;</strong>
       </p>
+      <small>
+        Developed by{" "}
+        <a href="https://github.com/tertcoder" target="_blank" rel="noreferrer">
+          Bon Tertius T.
+        </a>
+      </small>
     </li>
   );
 }
