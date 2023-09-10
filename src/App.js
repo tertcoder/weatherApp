@@ -12,7 +12,7 @@ export default function App() {
 
   useEffect(
     function () {
-      // const controller = new AbortController();
+      const controller = new AbortController();
 
       async function fetchWeather() {
         try {
@@ -21,8 +21,8 @@ export default function App() {
           setIsLoading(true);
           // 1) Getting location (geocoding)
           const geoRes = await fetch(
-            `https://geocoding-api.open-meteo.com/v1/search?name=${location}`
-            // ,{ signal: controller.signal }
+            `https://geocoding-api.open-meteo.com/v1/search?name=${location}`,
+            { signal: controller.signal }
           );
           const geoData = await geoRes.json();
 
@@ -34,8 +34,8 @@ export default function App() {
 
           // 2) Getting actual weather
           const weatherRes = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&daily=weathercode,temperature_2m_max,temperature_2m_min`
-            //, { signal: controller.signal }
+            `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&daily=weathercode,temperature_2m_max,temperature_2m_min`,
+            { signal: controller.signal }
           );
           const weatherData = await weatherRes.json();
           console.log(weatherData);
@@ -82,6 +82,7 @@ function Weather({ location, weather }) {
     time: dates,
     weathercode: codes,
   } = weather;
+  const sunnyStyle = { backgroundColor: "#fef4a8" };
   return (
     <div>
       <h2>Weather {location}</h2>
@@ -92,6 +93,9 @@ function Weather({ location, weather }) {
             max={max.at(i)}
             min={min.at(i)}
             code={codes.at(i)}
+            sunnyStyle={
+              codes.at(i) >= 0 && codes.at(i) <= 2 ? sunnyStyle : null
+            }
             key={date}
             isToday={i === 0}
           />
@@ -101,9 +105,9 @@ function Weather({ location, weather }) {
   );
 }
 
-function Day({ date, max, min, code, isToday }) {
+function Day({ date, max, min, code, isToday, sunnyStyle }) {
   return (
-    <li className="day">
+    <li className="day" style={sunnyStyle}>
       <span>{getWeatherIcon(code)}</span>
       <p>{isToday ? "Today" : formatDay(date)}</p>
       <p>
